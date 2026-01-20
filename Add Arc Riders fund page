@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Bob Fund — Arc Riders</title>
+  <style>
+    :root{
+      --bg:#0b1020; --card:#121a2a; --text:#ecf2ff; --muted:#a5b4d6;
+      --accent:#7c5cff; --accent2:#2ee59d; --warn:#ffcc66; --line:rgba(165,180,214,.18);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      color:var(--text);
+      background:
+        radial-gradient(1100px 650px at 12% 8%, rgba(124,92,255,.28), transparent),
+        radial-gradient(900px 600px at 88% 18%, rgba(46,229,157,.18), transparent),
+        var(--bg);
+    }
+    .wrap{max-width:980px;margin:0 auto;padding:22px}
+    .topbar{
+      display:flex; gap:10px; align-items:center; justify-content:space-between;
+      margin: 10px 0 18px;
+    }
+    .badge{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 12px; border-radius:999px;
+      background:rgba(124,92,255,.18); border:1px solid rgba(124,92,255,.35);
+      font-weight:800; letter-spacing:.2px;
+    }
+    .note{
+      padding:12px 14px; border-radius:14px;
+      border:2px dashed rgba(255,204,102,.75);
+      background:rgba(255,204,102,.12);
+      font-weight:900;
+    }
+    .grid{display:grid;grid-template-columns:1.35fr .65fr;gap:16px}
+    @media (max-width:900px){.grid{grid-template-columns:1fr}}
+    .card{
+      background:rgba(18,26,42,.92);
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:18px;
+      box-shadow:0 18px 60px rgba(0,0,0,.35);
+    }
+    h1{margin:0 0 8px;font-size:28px}
+    h2{margin:0 0 12px;font-size:15px;color:var(--muted);font-weight:800}
+    p{margin:10px 0;line-height:1.5;color:rgba(236,242,255,.92)}
+    .progress{
+      height:12px;border-radius:999px;overflow:hidden;
+      background:rgba(165,180,214,.12);
+      border:1px solid var(--line);
+      margin-top:10px;
+    }
+    .bar{height:100%;width:68%;background:linear-gradient(90deg, var(--accent), var(--accent2))}
+    .row{display:flex;justify-content:space-between;gap:10px;margin-top:10px;color:var(--muted);font-weight:800}
+    .big{font-size:30px;font-weight:1000;margin-top:8px}
+    .btn{
+      width:100%;
+      padding:12px 14px;border-radius:14px;
+      border:1px solid rgba(165,180,214,.22);
+      background:rgba(124,92,255,.22);
+      color:var(--text);
+      font-weight:950;
+      cursor:pointer;
+      transition:.15s transform ease, .15s background ease;
+      margin-top:10px;
+    }
+    .btn:hover{transform:translateY(-1px);background:rgba(124,92,255,.30)}
+    .btn.secondary{background:rgba(165,180,214,.10)}
+    .list{list-style:none;margin:10px 0 0;padding:0}
+    .list li{padding:10px 0;border-top:1px solid rgba(165,180,214,.12);color:rgba(236,242,255,.9)}
+    .fineprint{
+      margin-top:12px;
+      font-size:12px;
+      color:rgba(165,180,214,.95);
+    }
+    .fineprint strong{color:var(--warn)}
+    .toast{
+      display:none;
+      position:fixed;left:50%;bottom:16px;transform:translateX(-50%);
+      background:rgba(18,26,42,.97);
+      border:1px solid rgba(255,204,102,.55);
+      padding:12px 14px;border-radius:14px;
+      box-shadow:0 18px 60px rgba(0,0,0,.45);
+      max-width:92vw;
+      font-weight:900;
+    }
+    .toast small{display:block;margin-top:6px;color:rgba(165,180,214,.95);font-weight:750}
+    .mini{
+      font-size:12px;color:rgba(165,180,214,.9);margin-top:10px
+    }
+    .linkbox{
+      margin-top:10px; padding:10px 12px; border-radius:14px;
+      border:1px solid rgba(165,180,214,.20);
+      background:rgba(165,180,214,.08);
+      color:rgba(236,242,255,.9);
+      word-break:break-all;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <div class="badge">🎮 Bob Fund • Arc Riders</div>
+      <div class="note">⚠️ Scherzo: nessuna donazione reale</div>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <h1>Aiutiamo Bob a prendere <span style="color:var(--accent2)">Arc Riders</span> 😄</h1>
+        <h2>Crowdfunding “da bar” per ridere con gli amici.</h2>
+
+        <p>
+          Bob ha creato questa pagina per fare scena nel gruppo WhatsApp.
+          I pulsanti sotto non raccolgono soldi: quando premi “Dona” ti dice che è uno scherzo.
+        </p>
+
+        <div class="big">€68 / €100</div>
+        <div class="progress" aria-label="Progresso finto">
+          <div class="bar"></div>
+        </div>
+        <div class="row">
+          <div>68% “raccolto”</div>
+          <div>14 “sostenitori”</div>
+          <div>Obiettivo: Arc Riders</div>
+        </div>
+
+        <button class="btn" onclick="donate(5)">Dona €5</button>
+        <button class="btn" onclick="donate(10)">Dona €10</button>
+        <button class="btn" onclick="donate(20)">Dona €20</button>
+        <button class="btn secondary" onclick="copyLink()">Copia link da WhatsApp</button>
+
+        <div class="mini">Link della pagina (quando la pubblichi):</div>
+        <div class="linkbox" id="pageLink"></div>
+
+        <div class="fineprint">
+          <strong>Importante:</strong> questa pagina è una gag. Nessun pagamento, nessuna raccolta fondi, zero transazioni.
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Aggiornamenti di Bob</h2>
+        <ul class="list">
+          <li><b>Update #1:</b> “Se arriviamo al 100%… ringrazio e basta.”</li>
+          <li><b>Update #2:</b> “Prometto niente spam (forse).”</li>
+          <li><b>Update #3:</b> “Grazie ai donatori immaginari 🫶”</li>
+        </ul>
+
+        <h2 style="margin-top:16px;">FAQ</h2>
+        <ul class="list">
+          <li><b>Si può donare davvero?</b> No.</li>
+          <li><b>Perché esiste?</b> Per ridere nel gruppo.</li>
+          <li><b>Cosa succede se clicco?</b> Compare “È uno scherzo”.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    const linkEl = document.getElementById("pageLink");
+    linkEl.textContent = window.location.href;
+
+    function showToast(html){
+      const t = document.getElementById("toast");
+      t.innerHTML = html;
+      t.style.display = "block";
+      clearTimeout(window.__toastTimer);
+      window.__toastTimer = setTimeout(() => t.style.display = "none", 2600);
+    }
+
+    function donate(amount){
+      showToast(
+        "😄 Donazione di €" + amount + " ricevuta!<small>SIKE: è uno scherzo. Nessun pagamento, nessuna transazione.</small>"
+      );
+    }
+
+    async function copyLink(){
+      try{
+        await navigator.clipboard.writeText(window.location.href);
+        showToast("📎 Link copiato!<small>Incollalo su WhatsApp.</small>");
+      }catch(e){
+        showToast("📎 Copia manualmente il link dalla barra in alto 🙂<small>(Permesso clipboard non disponibile)</small>");
+      }
+    }
+  </script>
+</body>
+</html>
+2) Come avere un link vero da mandare su WhatsApp (2 modi facili)
+Metodo A — GitHub Pages (gratis)
+Crea account GitHub (se non ce l’hai).
+Crea un repository chiamato bobfund
+Carica dentro il file bob-arcriders.html
+Rinominano in index.html
+Attiva Settings → Pages → Deploy from branch
+Ti dà un link tipo https://tuonome.github.io/bobfund/ (quello lo mandi su WhatsApp)
+Metodo B — Netlify Drop (ancora più veloce)
+Vai su Netlify (Netlify Drop)
+Trascina il file index.html nella pagina
+Ti genera subito un link pubblico da condividere
+Se mi dici quale metodo vuoi usare (A o B) ti scrivo i passaggi esatti “clic per clic” in 6 righe, così in 3 minuti hai il link pronto da WhatsApp.
