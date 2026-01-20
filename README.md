@@ -1,2 +1,2 @@
 # bob-arcriders
-Pagina scherzo stile crowdfunding per Arc Riders. Nessuna donazione reale.
+per Arc Riders donazione
